@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SampleController {
 	@GetMapping("sample/hello")
 	public String sayHello() {
-		return "hello: " + System.currentTimeMillis();
+		return "hello2: " + System.currentTimeMillis();
 	}
 	
 	
