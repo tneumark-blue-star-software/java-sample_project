@@ -1,14 +1,17 @@
 FROM alpine/git as clone 
-WORKDIR /app
+WORKDIR /clone_output_dir
 RUN git clone https://github.com/tneumark-blue-star-software/java-sample_project.git
+RUN ls -lart /clone_output_dir/java-sample_project/project2020
 
 FROM maven:3.5-jdk-8-alpine as build
-COPY --from=clone /app/java-sample_project/project2020 /source
-WORKDIR /source
+WORKDIR /build_output
+COPY --from=clone /clone_output_dir/java-sample_project/project2020 .
 RUN mvn clean install
+RUN ls -lart /build_output
 
-FROM tneumark/spring-boot-deploy4:latest
-COPY --from=build /source/start.sh /opt/dockertest/start.sh
-COPY --from=build /source/target/project2020-0.0.1-SNAPSHOT.jar /opt/dockertest/
+FROM openjdk:8-jre-alpine
+COPY --from=build /build_output/start.sh /opt/dockertest/start.sh
+COPY --from=build /build_output/target/project2020-0.0.1-SNAPSHOT.jar /opt/dockertest/
+RUN ls -lart /opt/dockertest
 EXPOSE 8080:8080
 CMD ["/opt/dockertest/start.sh"]
