@@ -10,9 +10,7 @@ RUN mvn clean install
 RUN ls -lart /build_output
 
 FROM openjdk:8-jre-alpine
-COPY --from=build /build_output/start.sh /opt/dockertest/start.sh
-RUN chmod +x /opt/dockertest/start.sh
 COPY --from=build /build_output/target/project2020-0.0.1-SNAPSHOT.jar /opt/dockertest/
 RUN ls -lart /opt/dockertest
 EXPOSE 8080:8080
-#ENTRYPOINT ["/opt/dockertest/start.sh"]
+CMD ["java", "-jar", "/opt/dockertest/project2020-0.0.1-SNAPSHOT.jar"]
