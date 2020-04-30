@@ -1,6 +1,6 @@
 [
   {
-    "name": "run_java_sample_app",
+    "name": "java_sample_service",
     "imageUri": "145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo:latest"
   }
 ]
