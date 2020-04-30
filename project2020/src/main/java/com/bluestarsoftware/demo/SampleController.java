@@ -12,7 +12,7 @@ public class SampleController {
 	
 	@GetMapping("sample/hello")
 	public String sayHello() {
-		return "Message Version 8 =" + System.currentTimeMillis() + "<br>" +
+		return "Message Version 12 =" + System.currentTimeMillis() + "<br>" +
 			   "Instance Metadata = " + getInstanceMetadata();
 	}
 
