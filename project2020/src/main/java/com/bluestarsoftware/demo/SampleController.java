@@ -11,7 +11,7 @@ public class SampleController {
 	public String sayHello() {
 		String hostname = "Unknown";
 		try {
-			hostname = InetAddress.getLocalHost().getHostAddress()
+			hostname = InetAddress.getLocalHost().getHostAddress();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
