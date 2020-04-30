@@ -1,11 +1,14 @@
 package com.bluestarsoftware.demo;
 
+import org.jboss.logging.Logger;
+import org.jboss.logging.Logger.Level;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class SampleController {
+	Logger logger = Logger.getLogger("SampleController");
 	
 	@GetMapping("sample/hello")
 	public String sayHello() {
@@ -15,6 +18,7 @@ public class SampleController {
 
 	private String getInstanceMetadata() {
 		String API = System.getenv("ECS_CONTAINER_METADATA_URI_V4");
+		logger.log(Level.INFO, "API=" + API);
 		String metadata = "Unavailable";
 		try {
 			RestTemplate template = new RestTemplate();
