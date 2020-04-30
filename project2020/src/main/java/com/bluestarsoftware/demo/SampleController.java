@@ -17,7 +17,7 @@ public class SampleController {
 	}
 
 	private String getInstanceMetadata() {
-		String API = System.getenv("ECS_CONTAINER_METADATA_URI_V4");
+		String API = System.getenv("ECS_CONTAINER_METADATA_URI");
 		logger.log(Level.INFO, "API=" + API);
 		String metadata = "Unavailable";
 		try {
