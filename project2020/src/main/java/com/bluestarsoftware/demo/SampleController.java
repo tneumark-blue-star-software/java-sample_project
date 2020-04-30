@@ -1,22 +1,28 @@
 package com.bluestarsoftware.demo;
 
-import java.net.InetAddress;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class SampleController {
+	public static final String API = "http://169.254.169.254/latest/meta-data/instance-id";
+	
 	@GetMapping("sample/hello")
 	public String sayHello() {
-		String hostname = "Unknown";
+		return "InstanceID=" + getInstanceId() + ", Message Version 8 =" + System.currentTimeMillis();
+	}
+
+	private String getInstanceId() {
+		String instanceId = "unknown";
 		try {
-			hostname = InetAddress.getLocalHost().getHostAddress();
+			RestTemplate template = new RestTemplate();
+			instanceId = template.getForObject(API, String.class);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "From " + hostname + ", I say hello7: " + System.currentTimeMillis();
+		return instanceId;
 	}
 	
 	
