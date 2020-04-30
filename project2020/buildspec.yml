@@ -9,7 +9,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t project_2020_ecs_repo .
+      - docker build -t project_2020_ecs_repo project2020/
       - docker tag project_2020_ecs_repo:latest 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo:latest      
   post_build:
     commands:
