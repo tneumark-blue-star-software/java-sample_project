@@ -1,6 +1,6 @@
 [
   {
-    "name": "sample-app",
+    "name": "ecr_hosted_image",
     "imageUri": "145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo:latest"
   }
 ]
