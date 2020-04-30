@@ -6,23 +6,25 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class SampleController {
-	public static final String API = "http://169.254.169.254/latest/meta-data/instance-id";
 	
 	@GetMapping("sample/hello")
 	public String sayHello() {
-		return "InstanceID=" + getInstanceId() + ", Message Version 8 =" + System.currentTimeMillis();
+		return "Message Version 8 =" + System.currentTimeMillis() + "<br>" +
+			   "Instance Metadata = " + getInstanceMetadata();
 	}
 
-	private String getInstanceId() {
-		String instanceId = "unknown";
+	private String getInstanceMetadata() {
+		String API = System.getenv("ECS_CONTAINER_METADATA_URI_V4");
+		String metadata = "Unavailable";
 		try {
 			RestTemplate template = new RestTemplate();
-			instanceId = template.getForObject(API, String.class);
+			metadata = template.getForObject(API, String.class);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			metadata = e.getMessage();
 		}
-		return instanceId;
+		return metadata;
 	}
 	
 	
