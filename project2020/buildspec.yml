@@ -4,15 +4,15 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-authorization-token --region us-east-1
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t java_sample:latest project2020
-      - docker tag java_sample:latest 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo/java_sample:latest      
+      - docker build -t project_2020_ecs_repo .
+      - docker tag project_2020_ecs_repo:latest 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo:latest      
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo/java_sample:latest
+      - docker push 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo:latest
