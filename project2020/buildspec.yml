@@ -9,10 +9,10 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t project_2020_ecs_repo:latest .
-      - docker tag project_2020_ecs_repo:latest 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo:latest      
+      - docker build -t java_sample:latest .
+      - docker tag java_sample:latest 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo/java_sample:latest      
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo:latest
+      - docker push 145696882850.dkr.ecr.us-east-1.amazonaws.com/project_2020_ecs_repo/java_sample:latest
